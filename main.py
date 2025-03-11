@@ -14,3 +14,6 @@ if sheet_data[0]["iataCode"] == "":
         row["iataCode"] = flight_search.get_iataCode(row["city"])
     print(f"sheet_data:\n {sheet_data}")
 
+data_manager.destination_data = sheet_data
+data_manager.update_aita_codes()
+
