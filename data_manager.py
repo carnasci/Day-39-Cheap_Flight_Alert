@@ -16,7 +16,7 @@ class DataManager:
         self._user = os.environ["SHEETY_USERNAME"]
         self._password = os.environ["SHEETY_PASSWORD"]
         self._authorization = HTTPBasicAuth(self._user, self._password)
-        self.destination_data = []
+        self.destination_data = {}
 
     def get_sheet_data(self):
         sheet_response = requests.get(url=SHEET_URL, auth=self._authorization)

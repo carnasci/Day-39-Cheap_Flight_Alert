@@ -5,7 +5,7 @@ from pprint import pprint
 data_manager = DataManager()
 
 
-sheet_data = data_manager.destination_data
+sheet_data = data_manager.get_sheet_data()
 pprint(sheet_data)
 
 if sheet_data[0]["iataCode"] == "":
