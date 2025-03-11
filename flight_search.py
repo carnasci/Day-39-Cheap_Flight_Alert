@@ -30,5 +30,29 @@ class FlightSearch:
         return data["access_token"]
 
     def get_iataCode(self, city_name):
-        code = "TESTING"
+        api_endpoint = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
+        header = {
+            "Authorization" : f"Bearer {self._token}"
+        }
+        query = {
+            "keyword" : city_name,
+            "max" : "2",
+            "include" : "AIRPORTS",
+        }
+        response = requests.get(
+            url=api_endpoint,
+            params=query,
+            headers=header,
+        )
+        print(f"Status code {response.status_code}. Airport IATA: {response.text}")
+
+        try:
+            data = response.json()["data"]
+            code = data[0]["iataCode"]
+        except IndexError:
+            print(f"IndexError: No airport code found for {city_name}.")
+            return "N/A"
+        except KeyError:
+            print(f"KeyError: No airport code found for {city_name}.")
+            return "Not Found"
         return code
